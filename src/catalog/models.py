@@ -57,7 +57,7 @@ class BookInstance(models.Model):
         ordering = ['due_back']
 
     def __str__(self):
-        return '{0} ({1})'.format(self.id, self.book.title)
+        return f"{self.id, self.book.title}"
 
 
 class Author(models.Model):
@@ -70,4 +70,4 @@ class Author(models.Model):
         return reverse('author-detail', args=[str(self.first_name)])
 
     def __str__(self):
-        return '{0} ({1})'.format(self.last_name, self.first_name)
+        return f"{self.last_name, self.first_name}"
