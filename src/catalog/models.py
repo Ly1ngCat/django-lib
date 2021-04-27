@@ -67,7 +67,9 @@ class Author(models.Model):
     date_of_death = models.DateField('Died', null=True, blank=True)
 
     def get_absolute_url(self):
-        return reverse('author-detail', args=[str(self.first_name)])
+        return reverse('author-detail', args=[str(self.pk)])
 
     def __str__(self):
         return f"{self.last_name, self.first_name}"
+
+
