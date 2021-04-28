@@ -16,6 +16,9 @@
         <li><strong>Authors:</strong> {{ num_authors }}</li>
         <li><strong>All genres:</strong> {{ num_genres }}</li>
         <li><strong>Books containing "love" in the title:</strong> {{ num_books_containing_love_in_title }}</li>
+
     </ul>
+
+    <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
 
 {% endblock %}
