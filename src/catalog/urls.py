@@ -1,4 +1,6 @@
 from django.urls import path
+
+from . import views
 from .views import index, BookListView, BookDetailView, AuthorListView, AuthorDetailView, LoanedBooksByUserListView, \
     LoanedBooksAll
 
@@ -11,5 +13,6 @@ urlpatterns = [
     url(r'^authors/$', AuthorListView.as_view(), name='authors'),
     url(r'^author/(?P<pk>\d+)$', AuthorDetailView.as_view(), name='author-detail'),
     url(r'^mybooks/$', LoanedBooksByUserListView.as_view(), name='my-borrowed'),
-    url(r'^borrowed/$', LoanedBooksAll.as_view(), name='all-borrowed')
+    url(r'^borrowed/$', LoanedBooksAll.as_view(), name='all-borrowed'),
+    url(r'^book/(?P<pk>[-\w]+)/renew/$', views.renew_book_librarian, name='renew-book-librarian'),
 ]
