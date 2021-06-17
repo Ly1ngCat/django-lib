@@ -2,13 +2,16 @@ from django.urls import path
 
 from . import views
 from .views import index, BookListView, BookDetailView, AuthorListView, AuthorDetailView, LoanedBooksByUserListView, \
-    LoanedBooksAll
+    LoanedBooksAll, BookCreate
 
 from django.conf.urls import url
 
 urlpatterns = [
     url(r'^$', index, name='index'),
     url(r'^books/$', BookListView.as_view(), name='books'),
+    url(r'book/create/', views.BookCreate.as_view(), name="book_create"),
+    url(r'book/(?P<pk>\d+)/update/$', views.BookUpdate.as_view(), name="book_update"),
+    url(r'book/(?P<pk>\d+)/delete/$', views.BookDelete.as_view(), name="book_delete"),
     url(r'^book/(?P<pk>\d+)$', BookDetailView.as_view(), name='book-detail'),
     url(r'^authors/$', AuthorListView.as_view(), name='authors'),
     url(r'^author/(?P<pk>\d+)$', AuthorDetailView.as_view(), name='author-detail'),

@@ -5,7 +5,7 @@ from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
 import datetime  # for checking renewal date range.
 
-from .models import BookInstance
+from .models import BookInstance, Book
 
 
 class RenewBookForm(forms.Form):
