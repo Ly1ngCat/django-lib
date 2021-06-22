@@ -60,7 +60,6 @@ class BookInstance(models.Model):
         ordering = ['due_back']
         permissions = (("can_mark_returned", "Set book as returned"),)
 
-
     def __str__(self):
         return f"{self.id, self.book.title}"
 
@@ -75,7 +74,7 @@ class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
-    date_of_death = models.DateField('Died', null=True, blank=True)
+    date_of_death = models.DateField('died', null=True, blank=True)
 
     def get_absolute_url(self):
         return reverse('author-detail', args=[str(self.pk)])

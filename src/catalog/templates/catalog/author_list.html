@@ -11,7 +11,7 @@
 
       {% for author in author_list %}
       <li>
-        <a href="{{ author.get_absolute_url }}">{{ author.last_name }}, {{ author.first_name}} ({{ author.date_of_birth }} - {% if author.date_of_death %} {{ author.date_of_death }}{% if perms.catalog.can_mark_returned %}) - <a href="{% url 'author_update' author.pk %}">Edit</a> - <a href="{% url 'author_delete' author.pk %}">Delete</a> {% endif %} {% endif %}</a>
+        <a href="{{ author.get_absolute_url }}">{{ author.last_name }}, {{ author.first_name}} ({{ author.date_of_birth }} - {% if author.date_of_death %} {{ author.date_of_death }}) {% if perms.catalog.can_mark_returned %} - <a href="{% url 'author_update' author.pk %}">Edit</a> - <a href="{% url 'author_delete' author.pk %}">Delete</a> {% endif %} {% endif %}</a>
       </li>
       {% endfor %}
 
