@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from ..models import Author, Book
+from ..models import Author, Book, Genre
 
 
 class AuthorModelTest(TestCase):
@@ -50,15 +50,32 @@ class AuthorModelTest(TestCase):
         # This will also fail if the urlconf is not defined.
         self.assertEquals(author.get_absolute_url(), '/catalog/author/1')
 
-#
-# class BookModelTest(TestCase):
-#
-#     @classmethod
-#     def SetUpTestData(cls):
-#         Book.objects.create(title='Первая книга', author='Иванов Иван', summary='Это просто тестовая книга',
-#                             isbn='1111111111111', genre='Жанр')
-#
-#     def test_book_title_label(self):
-#         book = Book.objects.get(id=2)
-#         field_label = book._meta.get_field('title').verbose_name
-#         self.assertEquals(field_label, 'title')
+
+class BookModelTest(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        test_author = Author.objects.create(first_name='John', last_name='Smith')
+        test_book = Book.objects.create(title='Book Title', summary='My book summary', isbn='ABCDEFG',
+                                        author=test_author)
+        # Create genre as a post-step
+        genre_objects_for_book = Genre.objects.all()
+        test_book.genre.set(genre_objects_for_book)  # Присвоение типов many-to-many напрямую недопустимо
+
+    def test_book_title_label(self):
+        test_book = Book.objects.get(pk=1)
+        field_label = test_book._meta.get_field('title').verbose_name
+        self.assertEquals(field_label, 'title')
+
+    def test_book_summary_label(self):
+        test_book = Book.objects.get(pk=1)
+        field_label = test_book._meta.get_field('summary').verbose_name
+        self.assertEquals(field_label, 'summary')
+
+    def test_book_isbn_label(self):
+        test_book = Book.objects.get(pk=1)
+        field_label = test_book._meta.get_field('isbn').verbose_name
+        self.assertEquals(field_label, 'ISBN')
+
+
+
